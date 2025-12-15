@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="./output.css" rel="stylesheet">
+</head>
+
+<body class="bg-[#e4e4e4]">
+  <header class="bg-white">
+    <nav class ="flex justify-between items-center w-[92%] mx-auto">
+      <div>
+        <img class="w-40" src="/src/img/logo.png">
+      </div>
+      <div id="headerNavi" class="absolute md:static hidden md:block bg-white min-h-48 md:min-h-fit w-full md:w-auto left-0 md:left-auto top-14 text-center flex items-center justify-center md:justify-between">
+        <ul class="flex flex-col md:flex-row gap-5">
+          <li class="hover:text-gray-500"><a href="index.html">Informieren</a></li>
+          <li class="hover:text-gray-500">Über uns</li>
+          <li class="hover:text-gray-500 underline">Spenden</li>
+        </ul>
+      </div>
+      <div class="flex items-center gap-4">
+          <button class="font-semibold hover:text-gray-500">Kontakt</button>
+          <a href="spenden.html">
+            <button class="bg-[#bf4243] text-white font-semibold px-3 py-2 rounded-2xl hover:bg-[#852e2f]">Spenden</button>
+          </a>
+          <button id="menu" onclick="toggleMenu(this)" class="md:hidden">
+            <img id="menuToggleImage" class="w-8" src="/src/img/menu.png">
+          </button>
+      </div>
+    </nav>
+    <script>
+      function toggleMenu(e) {
+        var buttonimage = document.getElementById("menuToggleImage")
+        var headerNavi = document.getElementById("headerNavi")
+
+        if (e.id == "menu") {
+          e.id = "close"
+          headerNavi.classList.remove("hidden")
+          buttonimage.src = "/src/img/close.png"
+        } else {
+          e.id = "menu"
+          headerNavi.classList.add("hidden")
+          buttonimage.src = "/src/img/menu.png"
+        }
+      }
+    </script>
+  </header>
+  <section>
+    <div class="relative flex justify-center top-14">
+      <div class="w-[45vw] bg-gray-400 rounded-full h-2">
+        <div id="progressbar" class="bg-[#bf4243] w-[20%] h-full rounded-full "></div>
+      </div>
+    </div>
+    <div id="auswertung" class="hidden">
+      <div class="flex flex-col relative py-32 gap-8">
+          <div class="flex flex-col items-center">
+              <span class="font-semibold text-2xl">Vielen Dank!</span>
+              <span id="abgabeDanke" class="text-sm hidden">Wir freuen uns auf Sie und Ihre Spende!</span>
+              <span id="abholungDanke" class="text-sm hidden">Wir kümmern uns so schnell wie möglich um die Abholung!</span>
+          </div>
+        <div class="flex flex-col items-center gap-6">
+          <span class="font-semibold">Hier sind Ihre angegebenen Informationen:</span>
+          
+          <div class="flex gap-12">
+            <ul>
+              <li><span id="vornameString"></span></li>
+              <li><span id="postleitzahlString"></span></li>
+              <li><span id="strasseString"></span></li>
+              <li><span id="telefonString"></span></li>
+            </ul>
+            <ul>
+              <li><span id="nameString"></span></li>
+              <li><span id="ortString"></span></li>
+              <li><span id="zusatzString"></span></li>
+              <li><span id="emailString"></span></li>
+            </ul>
+          </div>
+          <div class="flex flex-row gap-6">
+            <div class="flex flex-col gap-6">
+              <span class="font-semibold">Art der Kleidung:</span>
+              <ul class="flex flex-col items-center">
+                <li><span id="oberteilString"></span></li>
+                <li><span id="unterteilString"></span></li>
+                <li><span id="ganzkorperString"></span></li>
+                <li><span id="jackenString"></span></li>
+                <li><span id="accessoiresString"></span></li>
+              </ul>
+            </div>
+            <div class="flex flex-col gap-6">
+              <span class="font-semibold">Krisengebiet:</span>
+              <ul class="flex flex-col items-center">
+                <li><span id="afghanistanString"></span></li>
+                <li><span id="syrienString"></span></li>
+                <li><span id="jemenString"></span></li>
+                <li><span id="sudanString"></span></li>
+                <li><span id="madagaskarString"></span></li>
+                <li><span id="sahelzoneString"></span></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="relative flex flex-col gap-4 items-center top-4">
+            <div>
+              <a href="index.html">
+                <button onclick="continueKleidung()" class="bg-[#bf4243] py-3 px-5 text-2xl font-semibold rounded-full text-white hover:bg-[#852e2f]">Weiter</button>
+              </a>
+            </div>
+          </div>
+        </div>
+      <script>
+        let auswertungID = document.getElementById("auswertung")
+        function auswertungStart() {
+          if (abholenCheckbox.checked) {
+            document.getElementById("vornameString").textContent = "Vorname: " + localStorage.getItem("vornameinput")
+            document.getElementById("nameString").textContent = "Name: " + localStorage.getItem("nameinput")
+            document.getElementById("postleitzahlString").textContent = "PLZ: " + localStorage.getItem("postleitzahlinput")
+            document.getElementById("ortString").textContent = "Ort: " + localStorage.getItem("ortinput")
+            document.getElementById("strasseString").textContent = "Strasse: " + localStorage.getItem("strasseinput")
+            document.getElementById("zusatzString").textContent = "Zusatzangaben: " + (localStorage.getItem("zusatzinput") || "Keine Zusatzangaben")
+            document.getElementById("telefonString").textContent = "Telefon: " + (localStorage.getItem("telefoninput") || "Keine Telefonnummer angegeben")
+            document.getElementById("emailString").textContent = "E-Mail: " + (localStorage.getItem("emailinput") || "Keine E-Mail angegeben")
+          }
+          
+          if (oberteile.checked) {
+            document.getElementById("oberteilString").textContent = "Oberteile"
+          } else {
+            document.getElementById("oberteilString").textContent = ""
+          }
+          if (unterteile.checked) {
+            document.getElementById("unterteilString").textContent = "Unterteile"
+          } else {
+            document.getElementById("unterteilString").textContent = ""
+          }
+          if (ganzkorper.checked) {
+            document.getElementById("ganzkorperString").textContent = "Ganzkörperkleidung"
+          } else {
+            document.getElementById("ganzkorperString").textContent = ""
+          }
+          if (jacken.checked) {
+            document.getElementById("jackenString").textContent = "Jacken & Mäntel"
+          } else {
+            document.getElementById("jackenString").textContent = ""
+          }
+          if (accessoires.checked) {
+            document.getElementById("accessoiresString").textContent = "Accessoires"
+          } else {
+            document.getElementById("accessoiresString").textContent = ""
+          }
+
+
+
+          if (afghanistan.checked) {
+            document.getElementById("afghanistanString").textContent = "Afghanistan"
+          } else {
+            document.getElementById("afghanistanString").textContent = ""
+          }
+          if (syrien.checked) {
+            document.getElementById("syrienString").textContent = "Syrien"
+          } else {
+            document.getElementById("syrienString").textContent = ""
+          }
+          if (jemen.checked) {
+            document.getElementById("jemenString").textContent = "Jemen"
+          } else {
+            document.getElementById("jemenString").textContent = ""
+          }
+          if (sudan.checked) {
+            document.getElementById("sudanString").textContent = "Sudan"
+          } else {
+            document.getElementById("sudanString").textContent = ""
+          }
+          if (madagaskar.checked) {
+            document.getElementById("madagaskarString").textContent = "Madagaskar"
+          } else {
+            document.getElementById("madagaskarString").textContent = ""
+          }
+          if (sahelzone.checked) {
+            document.getElementById("sahelzoneString").textContent = "Sahelzone"
+          } else {
+            document.getElementById("sahelzoneString").textContent = ""
+          }
+
+          if (abholenCheckbox.checked) {
+            document.getElementById("abholungDanke").classList.remove("hidden")
+          } else {
+            document.getElementById("abgabeDanke").classList.remove("hidden")
+          }
+        }
+      </script>
+      </div>
+    </div>  
+    <div id="krisengebietAuswahl" class="hidden">
+      <div class="relative py-32">
+          <div class="flex flex-col items-center">
+              <span class="font-semibold text-2xl">Krisengebietauswahl</span>
+              <span class="text-sm">Wähle aus wohin deine Spende hingeliefert wird.</span>
+          </div>
+          <div>
+            <ul class="relative flex flex-col gap-10 items-center top-14">
+              <li class="flex gap-14 mr-5 ml-5">
+                <div class="flex items-center gap-4">
+                  <input name="krisengebiet" id="afghanistan" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center">Afghanistan</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <input name="krisengebiet" id="syrien" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center">Syrien</span>
+                </div>
+              </li>
+              <li class="flex gap-14 mr-5 ml-5">
+                <div class="flex items-center gap-4">
+                  <input name="krisengebiet" id="jemen" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center">Jemen</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <input name="krisengebiet" id="sudan" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center">Sudan</span>
+                </div>
+              </li>
+              <li class="flex gap-14 mr-5 ml-5">
+                <div class="flex items-center gap-4">
+                  <input name="krisengebiet" id="madagaskar" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center">Madagaskar</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <input name="krisengebiet" id="sahelzone" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center">Sahelzone</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+      </div>
+      <div class="relative flex flex-col gap-4 items-center -top-2">
+        <div>
+          <button onclick="continueAuswertung()" class="bg-[#bf4243] py-3 px-5 text-2xl font-semibold rounded-full text-white hover:bg-[#852e2f]">Weiter</button>
+        </div>
+        <span id="krisenWarnung" class="font-semibold text-red-600 hidden">Bitte wähle eines der gegebenen Auswahlmöglichkeiten!</span>
+      </div>
+      <script>
+        let krisengebietAuswahl = document.getElementById("krisengebietAuswahl")
+        let krisenWarnung = document.getElementById("krisenWarnung")
+
+        let afghanistan = document.getElementById("afghanistan")
+        let syrien = document.getElementById("syrien")
+        let jemen = document.getElementById("jemen")
+        let sudan = document.getElementById("sudan")
+        let madagaskar = document.getElementById("madagaskar")
+        let sahelzone = document.getElementById("sahelzone")
+
+        function checkkrise() {
+            const allecheckboxes = document.querySelectorAll("input[name='krisengebiet']")
+            return Array.from(allecheckboxes).some(allecheckboxes => allecheckboxes.checked)
+        }
+
+      </script>
+    </div>
+    <div id="kleiderAuswahl" class="hidden">
+      <div class="relative py-32">
+          <div class="flex flex-col items-center">
+              <span class="font-semibold text-2xl">Art der Kleidung auswählen</span>
+          </div>
+          <div>
+            <ul class="relative flex flex-col gap-10 items-center top-14">
+              <li class="flex gap-14 mr-5 ml-5">
+                <div class="flex items-center gap-4">
+                  <input name="kleidung" id="oberteile" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center">Oberteile</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <input name="kleidung" id="unterteile" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center">Unterteile</span>
+                </div>
+              </li>
+              <li class="flex gap-14 mr-5 ml-5">
+                <div class="flex items-center gap-4">
+                  <input name="kleidung" id="ganzkorper" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center">Ganzkörper</span>
+                </div>
+                <div class="flex items-center gap-4">
+                  <input name="kleidung" id="jacken" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center">Jacken & Mäntel</span>
+                </div>
+              </li>
+              <li class="flex gap-14 mr-5 ml-5">
+                <div class="flex items-center gap-4">
+                  <input name="kleidung" id="accessoires" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center">Accessoires</span>
+                </div>
+              </li>
+            </ul>
+          </div> 
+      </div>
+      <div class="relative flex flex-col gap-4 items-center -top-6">
+        <div>
+          <button onclick="continueKrise()" class="bg-[#bf4243] py-3 px-5 text-2xl font-semibold rounded-full text-white hover:bg-[#852e2f]">Weiter</button>
+        </div>
+        <span id="kleidungsWarnung" class="font-semibold text-red-600 hidden">Bitte wähle mindestens eine Kleiderart!</span>
+      </div>
+      <script>
+        let kleiderAuswahl = document.getElementById("kleiderAuswahl")
+        let oberteile = document.getElementById("oberteile")
+        let unterteile = document.getElementById("unterteile")
+        let ganzkorper = document.getElementById("ganzkorper")
+        let jacken = document.getElementById("jacken")
+        let accessoires = document.getElementById("accessoires")
+        let kleidungsWarnung = document.getElementById("kleidungsWarnung")
+
+        function checkkleidung() {
+            const allecheckboxes = document.querySelectorAll("input[name='kleidung']")
+            return Array.from(allecheckboxes).some(allecheckboxes => allecheckboxes.checked)
+        }
+      </script>
+    </div>
+    <div id="adressenAngabe" value="unchecked" class="hidden">
+        <div class="relative py-32">
+          <div class="flex flex-col items-center">
+            <span class="font-semibold text-2xl">Abholung per Sammelfahrzeug</span>
+            <span class="text-sm">Angaben mit einem * sind Pflichtangaben.</span>
+          </div>
+          <div class="relative top-10">
+            <ul class="flex flex-col gap-4">
+              <li class="flex flex-row justify-center gap-1 md:gap-14">
+                <div>
+                    <span class="">Vorname *</span>
+                  <div>
+                    <input id="vorname" data-required="true" data-filled="false" type="text" class="bg-white border-gray-400 border-2 border-solid rounded-xl py-1 md:w-60" placeholder="z.B. Alexander">
+                  </div>
+                </div>
+                <div>
+                    <span class="">Name *</span>
+                  <div>
+                    <input id="name" data-required="true" data-filled="false" type="text" class="bg-white border-gray-400 border-2 border-solid rounded-xl py-1 md:w-60" placeholder="z.B. Schmidt">
+                  </div>
+                </div>
+              </li>
+              <li class="flex flex-row justify-center gap-1 md:gap-14">
+                <div>
+                    <span class="">Postleitzahl *</span>
+                  <div>
+                    <input id="postleitzahl" data-required="true" data-filled="false" type="text" class="bg-white border-gray-400 border-2 border-solid rounded-xl py-1 md:w-60" placeholder="z.B. 123456">
+                  </div>
+                </div>
+                <div>
+                    <span class="">Ort *</span>
+                  <div>
+                    <input id="ort" data-required="true" data-filled="false" type="text" class="bg-white border-gray-400 border-2 border-solid rounded-xl py-1 md:w-60" placeholder="z.B. Berlin">
+                  </div>
+                </div>
+              </li>
+              <li class="flex flex-row justify-center gap-1 md:gap-14">
+                <div>
+                    <span class="">Straße *</span>
+                  <div>
+                    <input id="strasse" data-required="true" data-filled="false" type="text" class="bg-white border-gray-400 border-2 border-solid rounded-xl py-1 md:w-60" placeholder="z.B. Hauptstraße 13">
+                  </div>
+                </div>
+                <div>
+                    <span class="">Zusatzangaben </span>
+                  <div>
+                    <input id="zusatzangaben" type="text" class="bg-white border-gray-400 border-2 border-solid rounded-xl py-1 md:w-60" placeholder="z.B. Stockwerk etc.">
+                  </div>
+                </div>
+              </li>
+              <li class="flex flex-row justify-center gap-1 md:gap-14">
+                <div>
+                    <span class="">Telefonnummer</span>
+                  <div>
+                    <input id="telefon" type="text" class="bg-white border-gray-400 border-2 border-solid rounded-xl py-1 md:w-60" placeholder="z.B. Hauptstraße 12">
+                  </div>
+                </div>
+                <div>
+                    <span class="">E-Mail Adresse</span>
+                  <div>
+                    <input id="email" type="text" class="bg-white border-gray-400 border-2 border-solid rounded-xl py-1 md:w-60" placeholder="z.B. 123456 Berlin">
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <div class="relative flex flex-col gap-4 items-center top-20">
+              <div>
+                <button onclick="continueKleidung()" class="bg-[#bf4243] py-3 px-5 text-2xl font-semibold rounded-full text-white hover:bg-[#852e2f]">Weiter</button>
+              </div>
+              <span id="angabenwarnung" class="font-semibold text-red-600 hidden">Bitte fülle die fehlenden Angaben aus.</span>
+            </div>
+          </div>
+        </div>
+        <script>
+          const vornameinput = document.getElementById("vorname")
+          const nameinput = document.getElementById("name")
+          const strasseinput = document.getElementById("strasse")
+          const zusatzinput = document.getElementById("zusatzangaben")
+          const telefoninput = document.getElementById("telefon")
+          const emailinput = document.getElementById("email") 
+          const postleitzahlinput = document.getElementById("postleitzahl")
+          const ortinput = document.getElementById("ort")
+          const allepflichtangaben = document.querySelectorAll("[data-required]")
+
+          const angabenWarnung = document.getElementById("angabenwarnung")
+
+          function savedata(variable, storagename) {
+            variable.addEventListener("change", function(e) {
+              angabenWarnung.classList.add("hidden")
+              e.target.classList.remove("bg-red-200")
+              e.target.classList.add("bg-white")
+              if (storagename != "postleitzahlinput") {
+                if (e.target.value.length <= 1 && e.target.hasAttribute("data-required")){
+                  e.target.classList.add("bg-red-200")
+                  console.log("Zu kurz!")
+                  localStorage.removeItem(storagename)
+                } else if (e.target.value.length > 1){
+                  e.target.dataset.filled = "true"
+                  localStorage.setItem(storagename, e.target.value)
+                  console.log(localStorage.getItem(storagename))
+                }
+              } else {
+                if ((e.target.value.length < 5) || !/^[0-9]{5}$/.test(e.target.value) || e.target.value.substring(0,2) != 10){
+                  e.target.classList.add("bg-red-200")
+                  localStorage.removeItem(storagename)
+                } else if (e.target.value.length == 5 && /^[0-9]{5}$/.test(e.target.value) && e.target.value.substring(0,2) == 10){
+                  e.target.dataset.filled = "true"
+                  localStorage.setItem(storagename, e.target.value)
+                  console.log(localStorage.getItem(storagename))
+                }
+              }
+            })
+          }
+
+          function checkfinish() {
+            localStorage.setItem("alleausgefullt", true)
+
+            allepflichtangaben.forEach(function(alle) {
+              if (alle.dataset.filled !=  "true") {
+                localStorage.setItem("alleausgefullt", false)
+              }
+            })
+          }
+
+          savedata(vornameinput, "vornameinput")
+          savedata(nameinput, "nameinput")
+          savedata(strasseinput, "strasseinput")
+          savedata(ortinput, "ortinput")
+          savedata(postleitzahlinput, "postleitzahlinput")
+          savedata(zusatzinput, "zusatzinput")
+          savedata(telefoninput, "telefoninput")
+          savedata(emailinput, "emailinput")
+        </script>
+    </div>
+    <div id="versandOptionen" class="">
+       <div class="relative py-44">
+          <div class="flex flex-col items-center">
+            <span class="font-semibold text-2xl">Versandoptionen</span>
+            <span class="text-sm text-center mr-10 ml-10">Wähle aus ob Sie Ihre Spende bei einer Geschäftstelle abgeben möchten oder ob Ihre Spende von Zuhause aus abgeholt wird.</span>
+          </div>
+          <div>
+            <ul class="relative flex justify-center top-14">
+              <li class="flex gap-14 mr-5 ml-5">
+                <div class="flex items-center gap-4">
+                  <input id="abgabeCheckbox" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <span class="text-center"><span class="bg-[#ff7d7d] bg-opacity-70 px-1 font-semibold">Abgabe</span> bei einer Geschäftstelle</span>
+                </div>
+                <div class="relative flex gap-4 top-9">
+                  <input id="abholenCheckbox" value="unchecked" type="checkbox" class="w-6 h-6"> 
+                  <div class="flex flex-col gap-4">
+                    <span class="text-center"><span class="bg-[#ff7d7d] bg-opacity-70 px-1 font-semibold">Abholung</span> von Zuhause aus</span>
+                    <span class="text-sm text-gray-500">Um eine Abholung anzufordern <br>muss Ihre Postleitzahl mit "10***" <br>anfangen.</span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+       </div>
+       <div>
+        <div class="relative flex flex-col gap-4 items-center -top-10">
+          <div>
+            <button onclick="continueKleidung()" class="bg-[#bf4243] py-3 px-5 text-2xl font-semibold rounded-full text-white hover:bg-[#852e2f]">Weiter</button>
+          </div>
+          <span id="auswahlWarnung" class="font-semibold text-red-600 hidden">Bitte wähle eines der gegebenen Auswahlmöglichkeiten!</span>
+        </div>
+       </div>
+       <script>
+        let abholenCheckbox = document.getElementById("abholenCheckbox")
+        let abgabeCheckbox = document.getElementById("abgabeCheckbox")
+        let auswahlWarnung = document.getElementById("auswahlWarnung")
+
+        let versandOptionen = document.getElementById("versandOptionen")
+        let progessbar = document.getElementById("progressbar")
+
+        let adressenAngabe = document.getElementById("adressenAngabe")
+
+        abgabeCheckbox.addEventListener("change", function(){
+          auswahlWarnung.classList.add("hidden")
+          if (this.checked) {
+            abholenCheckbox.checked = false
+            abholenCheckbox.value = "unchecked"
+            this.value = "checked";
+          } else {
+            this.value = "unchecked";
+          }
+        })
+        abholenCheckbox.addEventListener("change", function(){
+          auswahlWarnung.classList.add("hidden")
+          if (this.checked) {
+            abgabeCheckbox.checked = false
+            abgabeCheckbox.value = "unchecked"
+            this.value = "checked";
+          } else {
+            this.value = "unchecked";
+          }
+        })
+       </script>
+    </div>
+  </section>
+  <script>
+    function continueVersand() {
+      versandOptionen.classList.add("hidden")
+      adressenAngabe.classList.remove("hidden")
+      progessbar.classList.add("w-[40%]")
+    }
+
+    function continueKleidung() {
+      checkfinish()
+
+      if (abgabeCheckbox.value == "checked" || localStorage.getItem("alleausgefullt") == "true") {
+        versandOptionen.classList.add("hidden")
+        adressenAngabe.classList.add("hidden")
+        kleiderAuswahl.classList.remove("hidden")
+        progessbar.classList.add("w-[60%]")
+
+      } else if(abholenCheckbox.value == "checked") {
+        continueVersand()
+        abholenCheckbox.value = "finish"
+        return
+      } else if(abholenCheckbox.value == "unchecked" && abgabeCheckbox.value == "unchecked") {
+        auswahlWarnung.classList.remove("hidden")
+      } if(localStorage.getItem("alleausgefullt") == "false") {
+        console.log("Ist nicht ausgefüllt")
+        angabenWarnung.classList.remove("hidden")
+      }
+    }
+
+    function continueKrise() {
+      if (checkkleidung()) {
+        kleiderAuswahl.classList.add("hidden")
+        krisengebietAuswahl.classList.remove("hidden")
+        progessbar.classList.add("w-[80%]")
+      } else {
+        kleidungsWarnung.classList.remove("hidden")
+      }
+    }
+
+    function continueAuswertung() {
+      if(checkkrise()) {
+        auswertungStart()
+        krisengebietAuswahl.classList.add("hidden")
+        auswertungID.classList.remove("hidden")
+        progessbar.classList.add("w-[100%]")
+      } else {
+        krisenWarnung.classList.remove("hidden")
+      }
+    }
+  </script>
+</body>

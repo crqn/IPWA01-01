@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="./output.css" rel="stylesheet">
+</head>
+
+<body class="bg-[#e4e4e4]">
+  <header class="bg-white">
+    <nav class ="flex justify-between items-center w-[92%] mx-auto">
+      <div>
+        <img class="w-40" src="/src/img/logo.png">
+      </div>
+      <div id="headerNavi" class="absolute md:static hidden md:block bg-white min-h-48 md:min-h-fit w-full md:w-auto left-0 md:left-auto top-14 text-center flex items-center justify-center md:justify-between">
+        <ul class="flex flex-col md:flex-row gap-5">
+          <li class="hover:text-gray-500 underline">Informieren</li>
+          <li class="hover:text-gray-500">Über uns</li>
+          <li class="hover:text-gray-500">Spenden</li>
+        </ul>
+      </div>
+      <div class="flex items-center gap-4">
+          <button class="font-semibold hover:text-gray-500">Kontakt</button>
+          <a href="spenden.html">
+            <button class="bg-[#bf4243] text-white font-semibold px-3 py-2 rounded-2xl hover:bg-[#852e2f]">Spenden</button>
+          </a>
+          <button id="menu" onclick="toggleMenu(this)" class="md:hidden">
+            <img id="menuToggleImage" class="w-8" src="/src/img/menu.png">
+          </button>
+      </div>
+    </nav>
+    <script>
+      function toggleMenu(e) {
+        var buttonimage = document.getElementById("menuToggleImage")
+        var headerNavi = document.getElementById("headerNavi")
+
+        if (e.id == "menu") {
+          e.id = "close"
+          headerNavi.classList.remove("hidden")
+          buttonimage.src = "/src/img/close.png"
+        } else {
+          e.id = "menu"
+          headerNavi.classList.add("hidden")
+          buttonimage.src = "/src/img/menu.png"
+        }
+      }
+    </script>
+  </header>
+  <section>
+    <div class="bg-[url(/src/img/bild1.jpg)] bg-cover h-96 flex items-center justify-center md:justify-start">
+      <div class="bg-gray-100 bg-opacity-90 top-32 md:px-16 px-4 py-4 ml-10 mr-10">
+        <ul class="text-center flex flex-col gap-3">
+          <li class="text-black text-l">
+            <span class="font-bold text-xl"><span class="bg-[#ff7d7d] bg-opacity-70 px-1">Kein</span> Mensch muss frieren!</span> <br><br>
+            Rund <span class="font-semibold bg-[#ff7d7d] bg-opacity-70 px-1">710 Millionen</span> Menschen auf der Welt <br>leben in extremer Armut und besitzen kaum <br>Kleidung für sich selber.
+            <br><br>Falls Sie helfen wollen dies zu ändern können Sie <br>das <span class="font-semibold">kostenfrei</span> tun!
+          </li>
+          <li class="">
+            <a href="spenden.html">
+              <button class ="bg-[#bf4243] text-white text-2xl font-semibold px-3 md:px-8 py-3 rounded-3xl hover:bg-[#852e2f]">Jetzt spenden!</button>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div>
+      <div class="relative flex justify-center bg-[#bf4243] text-white font-semibold text-2xl sm:-top-4 py-4 sm:py-2">
+        Und so einfach kann es gehen!
+      </div>
+      <div class="relative bg-white py-10 sm:py-6">
+        <ul class="flex flex-col sm:flex-row sm:justify-center md:gap-[10vw]">
+          <li class="flex flex-col sm:flex-row items-center">
+            <img src="/src/img/tshirt.png" class="w-32 sm:w-24">
+            <span class="relative text-3xl font-semibold sm:right-0 right-32 -top-32 sm:-top-12">1.</span><br><br>
+            <span class="relative sm:top-0 -top-20 text-xl sm:text-base">Kleidung zum <br>Spenden <span class="font-semibold bg-[#ff7d7d] bg-opacity-70 px-1">auswählen</span></span>
+          </li>
+          <li class="flex flex-col sm:flex-row items-center">
+            <img src="/src/img/delivery-man.png" class="w-32 sm:w-24">
+            <span class="relative text-3xl font-semibold sm:right-0 right-32 -top-32 sm:-top-12">2.</span><br><br>
+            <span class="relative sm:top-0 -top-20 text-xl sm:text-base">
+              Kleidung abholen<br> <span class="font-semibold bg-[#ff7d7d] bg-opacity-70 px-1">lassen</span> oder zur <br>Geschäftsstelle 
+              <span class="font-semibold bg-[#ff7d7d] bg-opacity-70 px-1">bringen</span> 
+            </span>
+          </li>
+          <li class="flex flex-col sm:flex-row items-center mr-10">
+            <img src="/src/img/heart.png" class="w-30 sm:w-20">
+            <span class="relative text-3xl font-semibold sm:right-0 right-32 -top-32 sm:-top-12">3.</span><br><br>
+            <span class="relative sm:top-0 -top-20 text-xl sm:text-base">
+              <span class="font-semibold bg-[#ff7d7d] bg-opacity-70 px-1">Gutes</span> tun<br>
+              und <span class="font-semibold bg-[#ff7d7d] bg-opacity-70 px-1">mitwirken</span>
+            </span>
+          </li>
+        </ul>
+        <span class="relative flex top-6 justify-end mr-4">Icons: https://www.flaticon.com/</span>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div>
+      <div class="flex flex-col items-center gap-6 py-14 ml-10 mr-10">
+        <span class="font-semibold text-xl text-center">Was geschieht mit der gespendeten Kleidung?</span>
+        <span class="inline-block text-center">
+          Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, 
+          sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem 
+          ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore 
+          magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata 
+          sanctus est Lorem ipsum dolor sit amet.
+        </span>
+      </div>
+      <div class="relative flex flex-col items-center justify-center max-md:hidden -top-8">
+        <img src="img/bild2.jpg" class="w-[70vw]">
+        <span>https://targobank-magazin.de/fuer-den-guten-zweck-kleider-handys-brillen/</span>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="bg-[#bf4243] py-8 md:py-4 flex flex-col items-center gap-4">
+      <span class="font-semibold text-xl md:text-2xl text-white"> Unterstütze uns! </span>
+      <button class="bg-white px-4 py-3 rounded-full font-semibold">Jetzt spenden!</button>
+    </div>
+  </section>
+  <footer>
+    <div class="py-10 bg-[#662626] text-white">
+      <ul class="flex flex-row justify-center gap-[18vw] ml-5 mr-5">
+        <li class="hover:text-gray-400">
+          Impressum
+        </li>
+        <li class="hover:text-gray-400">
+          AGB
+        </li>
+        <li class="hover:text-gray-400">
+          Datenschutz
+        </li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>
