@@ -11,13 +11,15 @@
   <header class="bg-white">
     <nav class ="flex justify-between items-center w-[92%] mx-auto">
       <div>
-        <img class="w-40" src="/src/img/logo.png">
+        <a href="index.html">
+          <img class="w-40" src="/src/img/logo.png">
+        </a>
       </div>
       <div id="headerNavi" class="absolute md:static hidden md:block bg-white min-h-48 md:min-h-fit w-full md:w-auto left-0 md:left-auto top-14 text-center flex items-center justify-center md:justify-between">
         <ul class="flex flex-col md:flex-row gap-5">
           <li class="hover:text-gray-500 underline">Informieren</li>
           <li class="hover:text-gray-500">Über uns</li>
-          <li class="hover:text-gray-500">Spenden</li>
+          <li class="hover:text-gray-500"><a href="spenden.html">Spenden</a></li>
         </ul>
       </div>
       <div class="flex items-center gap-4">
@@ -26,7 +28,7 @@
             <button class="bg-[#bf4243] text-white font-semibold px-3 py-2 rounded-2xl hover:bg-[#852e2f]">Spenden</button>
           </a>
           <button id="menu" onclick="toggleMenu(this)" class="md:hidden">
-            <img id="menuToggleImage" class="w-8" src="/src/img/menu.png">
+            <img id="menuToggleImage" class="w-8" src="/src/img/menu.png" onclick="">
           </button>
       </div>
     </nav>
@@ -119,7 +121,9 @@
   <section>
     <div class="bg-[#bf4243] py-8 md:py-4 flex flex-col items-center gap-4">
       <span class="font-semibold text-xl md:text-2xl text-white"> Unterstütze uns! </span>
-      <button class="bg-white px-4 py-3 rounded-full font-semibold">Jetzt spenden!</button>
+      <a href="spenden.html">
+        <button class="bg-white px-4 py-3 rounded-full font-semibold">Jetzt spenden!</button>
+      </a>
     </div>
   </section>
   <footer>
